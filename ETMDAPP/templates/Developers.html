@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="shortcut icon" href="/static/IMAGES/mono.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="" />
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      display: block;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: auto;
+      min-height: 100vh;
+      margin: 0;
+      background-color:grey;
+    }
+    #body {
+      width: 100vw;
+      display: inline-block;
+      text-align:center;
+      position:relative;
+      
+    }
+    h1{
+      padding:20px;
+    }
+    h3 {
+      margin: 10px 0;
+    }
+
+    h6 {
+      margin: 5px 0;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 21px;
+    }
+
+    .card-container {
+      background-color: white;
+      display:inline-block;
+      border-radius: 5px;
+      box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+      color: black;   
+      position: relative;
+      width: 350px;
+      margin: 30px;
+      max-width: 100%;
+      text-align: center;
+    }
+
+
+
+    button.primary {
+      background-color: #03bfcb;
+      border: 1px solid #03bfcb;
+      border-radius: 3px;
+      color: #231e39;
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+      padding: 10px 25px;
+    }
+
+    button.primary.ghost {
+      background-color: transparent;
+      color: #02899c;
+    }
+
+    .skills {
+      background-color: #1f1a36;
+      color:white;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    .skills ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .skills ul li {
+      color:black;
+      background-color:white;
+      border: 1px solid #2d2747;
+      border-radius: 30px;
+      display: inline-block;
+      font-size: 12px;
+      margin: 0 7px 7px 0;
+      padding: 7px;
+    }
+    /* Apply styles to the image */
+img {
+    height:200px;
+    border-radius: 100%; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for transform and box-shadow */
+}
+
+/* Apply zoom effect on hover */
+img:hover {
+    transform: scale(1.2); /* Zoom effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase box shadow for more depth */
+}
+
+  </style>
+  <body>
+    <div id="header" style="height:25vh;">
+      {% include "Nav.html" %}
+    </div>
+    <div id="body">
+      <div class="card-container">
+        <h1>Gajal Rathore</h1>
+        <img
+          class="round"
+          src="https://media.licdn.com/dms/image/D4D03AQHtJH_7V6j6jQ/profile-displayphoto-shrink_800_800/0/1696042681563?e=2147483647&v=beta&t=hkMy4O0bqYZL_JFIE37dGl1p39CVM5EOPZ-ZyaeVIuo"
+          alt="user"
+        />
+        <p>
+          User interface designer & front-end developer
+        </p>
+        <div class="skills">
+          <h2>Technology</h2>
+          <ul>
+            <li>UI / UX</li>
+            <li>Front End Development</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-container">
+        <h1>Kushi Verma</h1>
+        <img
+          class="round"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmhdWCz_jn6OqYZZzskPJlXBF5u47xoyXioeDLDCjfVA&s"
+          alt="user"
+        />
+        <p>
+          Django Backend Developer
+        </p>
+        <div class="skills">
+          <h2>Technology</h2>
+          <ul>
+            <li>Django Framework</li>
+            <li>Python</li>
+            <li>Plugins</li>
+            <li>CRUD</li>
+            <li>Configure</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-container">
+        <h1>Darshana Partidar</h1>
+        <img
+          class="round"
+          src="https://randomuser.me/api/portraits/women/79.jpg"
+          alt="user"
+        />
+        <p>
+          Content Researcher & Content creator
+        </p>
+        <div class="skills">
+          <h2>Technology</h2>
+          <ul>
+            <li>Web Research</li>
+            <li>Content Genration</li>
+            <li>Report</li>
+            <li>Thesis</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-container">
+        <h1>Ashmeet Singh</h1>
+        <img
+          class="round"
+          src="https://media.licdn.com/dms/image/D4D03AQHmRjgGSml2Ug/profile-displayphoto-shrink_800_800/0/1701275107192?e=2147483647&v=beta&t=GoBAKhwaTWz7zCWZv_Eid9lviE4_K1m0kkYYCCu8hX4"
+          alt="user"
+        />
+        <p>
+          Database Administrator <br />
+        </p>
+        <div class="skills">
+          <h2>Technology</h2>
+          <ul>
+            <strong><li>Handle each and every connection with database using python and django admin database or sql. Manages CRUD operation on database  with view functions by the help of models.</li></strong>
+          </ul>
+        </div> 
+      </div>
+    </div>
+    
+  </body>
+</html>

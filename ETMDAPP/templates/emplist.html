@@ -1,0 +1,205 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Employee List</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Include Font Awesome CSS -->
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-image: url('https://source.unsplash.com/1600x900/?employee');
+                background-size:cover;
+                background-position: center;
+                background-repeat:no-repeat;
+                color: black; /* Set text color to black */
+            }
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+                font-family: 'Poppins', sans-serif;
+                font-size: 36px;
+                color: #fff;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .container {
+                width: 80%; /* Set container width to 80% */
+                margin: 0 auto; /* Center align the container */
+                background-color: rgba(255, 255, 255, 0.9); /* Set background color with opacity */
+                padding: 20px; /* Add some padding */
+                border-radius: 10px; /* Add border radius for rounded corners */
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add box shadow for depth */
+            }
+            .table-container {
+                overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #dddddd;
+            }
+            th {
+                background-color: #f2f2f2;
+                font-weight: 600;
+                color: #333;
+            }
+            td {
+                font-weight: 400;
+                color: #555;
+            }
+            td img {
+                max-width: 50px;
+                height: auto;
+                display: block;
+                margin: auto;
+            }
+            .search-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .search-container input[type=text] {
+                width: 300px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                background-color: rgba(255, 255, 255, 0.8);
+                margin-right: 10px;
+                transition: background-color 0.3s, box-shadow 0.3s;
+            }
+            .search-container input[type=text]:focus {
+                outline: none;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+            .search-container button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #007bff;
+                color: #ffffff;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .search-container button:hover {
+                background-color: #0056b3;
+            }
+            .edit-icon, .delete-icon {
+                color: #007bff;
+                margin-right: 10px;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+            .delete-icon:hover {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Employee List</h1>
+        <div class="container">
+            <div class="search-container">
+                <form method="GET" action="{% url 'search_employee' %}">
+                    {% csrf_token %}
+                    <input type="text" name="email" value="{{ query_email }}" placeholder="Search by Email">
+                    <input type="text" name="emp_id" value="{{ query_emp_id }}" placeholder="Search by Employee ID">
+                    <button onclick="searchEmployees()">Search</button>
+                </form>
+            </div>
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function searchEmployees() {
+                var email = $('#email').val();
+                var empId = $('#emp_id').val();
+
+                $.ajax({
+                    url: '{% url "search_employee" %}',
+                    method: 'GET',
+                    data: {
+                        email: email,
+                        emp_id: empId
+                    },
+                    success: function(response) {
+                        $('#employeeTableContainer').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
+            $('#searchButton').click(function() {
+                searchEmployees();
+            });
+        });
+    </script>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Employee ID</th>
+                            <th>Address</th>
+                            <th>Contact Number</th>
+                            <th>Destination</th>
+                            <th>Date of Birth</th>
+                            <th>Date of Joining</th>
+                            <th>Designation</th>
+                            <th>Description</th>
+                            <th>Picture</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for employee in employees %}
+                            <tr>
+                                <td>{{ employee.name }}</td>
+                                <td>{{ employee.email }}</td>
+                                <td>{{ employee.department }}</td>
+                                <td>{{ employee.employee_id }}</td>
+                                <td>{{ employee.address }}</td>
+                                <td>{{ employee.contact_number }}</td>
+                                <td>{{ employee.destination }}</td>
+                                <td>{{ employee.date_of_birth }}</td>
+                                <td>{{ employee.date_of_joining }}</td>
+                                <td>{{ employee.designation }}</td>
+                                <td>{{ employee.description }}</td>
+                                <td>
+                                    {% if employee.picture %}
+                                        <img src="{{ employee.picture.url }}" alt="Employee Picture">
+                                    {% else %}
+                                        <span>No Picture</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_employee' employee.pk %}" class="edit-icon"><i class="fas fa-edit"></i></a> <!-- Edit icon -->
+                                    <a href="{% url 'delete_employee' employee.pk %}" class="delete-icon"><i class="fas fa-trash-alt"></i></a> <!-- Delete icon -->
+                                </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            function confirmDelete(name, url) {
+                if (confirm(`Are you sure you want to delete ${name}?`)) {
+                    window.location.href = url;
+                }
+            }
+        </script>
+    </body>
+    </html>

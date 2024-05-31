@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Description</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 10px;
+            width: 90%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            padding: 10px;
+            color: #ffffff;
+        }
+
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .task-item {
+            margin: 10px;
+            padding: 20px;
+            width: 90%;
+            text-align: left;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 26px 58px 0 rgba(0, 0, 0, .22), 0 5px 14px 0 rgba(0, 0, 0, .18);
+            display: inline-block;
+        }
+
+        .task-item:hover {
+            background-color: #e9e9e9;
+        }
+
+        .task-details {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tasks Description</h1>
+    <div class="container">
+        <div class="task-list">
+            {% if tasks %}
+                <p>Number of tasks: {{ tasks|length }}</p>
+                {% for task in tasks %}
+                    <div class="task-item">
+                        <p style="color:black;"><strong>Task:</strong> {{ task.title }}</p>
+                        <p style="color:black;"><strong>Description:</strong> {{ task.description }}</p>
+                        <p style="color:black;"><strong>Deadline:</strong> {{ task.deadline_date }} {{ task.deadline_time }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No tasks found for this user.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

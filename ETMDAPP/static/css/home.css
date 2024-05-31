@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/static/IMAGES/training2.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar {
+    margin: 30px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInUp 1s forwards 0.5s;
+}
+
+.navbar img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 100%;
+    display: flex;
+}
+
+.navbar .home {
+    margin-right: auto;
+    text-align: left;
+    display: flex;
+}
+
+.navbar .home h1,
+.navbar .home h4 {
+    color: white;
+    margin: 0;
+    font-weight: bold;
+}
+
+.navbar .home h1 {
+    font-size: 24px;
+}
+
+.navbar .home h4 {
+    font-size: 18px;
+    color: blueviolet;
+}
+
+.navbar .nav {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-left: 450px;
+}
+
+.navbar .nav li {
+    margin-right: 30px;
+}
+
+.navbar .nav li a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.navbar .nav li a:hover {
+    color: #009688;
+}
+
+.content {
+    color: white;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+    margin-top: 20px;
+}
+
+.content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .banner {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .navbar {
+        position: static;
+        margin-bottom: 20px;
+        opacity: 1;
+        animation: none;
+    }
+
+    .navbar img {
+        margin-right: 0;
+    }
+
+    .navbar .nav {
+        margin-left: 0;
+    }
+
+    .navbar .nav li {
+        margin-right: 0;
+    }
+}
+
+.home {
+    text-align: left;
+    padding-right: auto;
+    /* Pushes .home to the left */
+    margin-left: 50px;
+    /* Adds space between .home and navigation */
+}
+        /* Add this to your existing home.css file or create a new one */
+    
+        .banner {
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            /* Set text color to white */
+        }
+    
+        .developer-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            /* Set background color to black */
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+    
+        .developer-icon:hover {
+            transform: scale(1.1);
+        }
+    
+        .developer-icon img {
+            width: 40px;
+            height: 40px;
+            filter: invert(1);
+            /* Invert the icon colors (black to white, white to black) */
+        }

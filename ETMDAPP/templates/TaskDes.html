@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <link rel="stylesheet" href="/static/css/taskemployeelist.css"> {% endcomment %}
+    <title>Task Description</title>
+</head>
+<style>
+.container {
+    display:flex-box;
+    flex-direction: column;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.finish-icon {
+    margin-left: auto; /* Aligns the finished image to the right */
+}
+
+.finish-icon img {
+    width: 20px;
+    height: 20px;
+}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 10px;
+            width:90%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            padding: 10px;
+            color: #ffffff;
+        }
+        h2{
+            border:2px solid black;
+            border-radius:40px;
+            background-color:black;
+            color:white;
+            text-align:center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align:center;
+        }
+
+        li {
+            margin:10px;
+            padding: 20px;
+            width:40%;
+            height:auto;
+            text-align: left;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 26px 58px 0 rgba(0, 0, 0, .22), 0 5px 14px 0 rgba(0, 0, 0, .18);
+        }
+        hr{
+            height: 1px;
+  background: black;
+  border: none;
+  outline: none;
+  margin: 3em 3em 5em;
+  position: relative;
+  
+  &:before {
+    
+    content: attr(data-symbol);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background: black;
+    color: white;
+    padding: 0.5em 3em;
+    @include transform(translate(-50%, -50%));
+    
+  }
+
+        }
+        
+hr#two {
+  @include background-image(linear-gradient(left, black, white));
+  
+  &:before {
+    left: 90%;
+    width: 20%;
+    padding: 1em;
+    top: 1px;
+  }
+}
+
+        li:hover {
+            background-color: #e9e9e9;
+        }
+
+        .task-details {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #666;
+        }
+        
+
+</style>
+<body>
+    <h1>Tasks Description</h1>
+<div class="container">
+    <ul class="task-list" style="display:block; width:100%;">
+        <!-- Inside your template -->
+        {% for employee in employees %}
+        <li style="display:inline-block;">
+            <h2>{{ employee.name }}</h2>
+            <p>Number of tasks: {{ employee.task_count }}</p>
+            <div class="task-details">
+                {% for task in employee.task_set.all %}
+                    {% csrf_token %}
+                    <!-- Pass the email as a hidden input field -->
+                    <input type="hidden" name="email" value="{{ employee.email }}">
+                    <p style="color:black;"><strong>Task:</strong> {{ task.title }}</p>
+                    <p  style="color:black;"><strong>Description:</strong> {{ task.description }}</p>
+                    <p  style="color:black;"><strong>Deadline:</strong> {{ task.deadline_date }} {{ task.deadline_time }}</p>
+                    <hr id="two" data-symbol="✈">
+                {% endfor %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

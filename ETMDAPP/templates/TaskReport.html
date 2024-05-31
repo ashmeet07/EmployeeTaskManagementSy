@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Analytics Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      .chart-container {
+        position: relative;
+        overflow: hidden;
+      }
+      .chart {
+        border: 1px solid #ccc;
+        padding: 20px;
+        animation: slideIn 0.5s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s;
+        cursor: pointer;
+      }
+      .chart img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        transition: transform 0.3s;
+      }
+      .chart h2 {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        margin: 0;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .chart:hover img {
+        transform: scale(1.1);
+      }
+      .chart:hover h2 {
+        opacity: 1;
+      }
+      .expanded-chart {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .expanded-chart img {
+        max-width: 90vw;
+        max-height: 90vh;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        font-size: 24px;
+        color: #333;
+      }
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Task Analytics Dashboard</h1>
+
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Task Distribution Among Employees</h2>
+          <img
+            src="/static/CHARTS/task_distribution.png"
+            alt="Task Distribution Chart"
+          />
+          <p>This chart shows the distribution of tasks among employees.</p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Remaining Tasks</h2>
+          <img
+            src="/static/CHARTS/remaining_tasks.png"
+            alt="Remaining Tasks Chart"
+          />
+          <p>
+            This chart shows the proportion of remaining tasks compared to
+            finished tasks.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Task Deadlines</h2>
+          <img
+            src="/static/CHARTS/task_deadlines.png"
+            alt="Task Deadlines Chart"
+          />
+          <p>
+            This chart visualizes the distribution of task deadlines over time.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Completed Tasks Over Time</h2>
+          <img
+            src="/static/CHARTS/completed_tasks_over_time.png"
+            alt="Completed Tasks Over Time Chart"
+          />
+          <p>This chart illustrates the trend of completed tasks over time.</p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Employee Performance</h2>
+          <img
+            src="/static/CHARTS/employee_performance.png"
+            alt="Employee Performance Chart"
+          />
+          <p>
+            This chart displays the number of completed tasks by each employee.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Task Description Word Cloud</h2>
+          <img
+            src="/static/CHARTS/task_description_wordcloud.png"
+            alt="Task Description Word Cloud"
+          />
+          <p>
+            This word cloud represents the frequency of words in task
+            descriptions.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Task Completion Rate by Employee</h2>
+          <img
+            src="/static/CHARTS/completion_rate_by_employee.png"
+            alt="Task Completion Rate by Employee"
+          />
+          <p>
+            This chart illustrates the task completion rate for each employee.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Task Distribution by Category</h2>
+          <img
+            src="/static/CHARTS/task_distribution_by_category.png"
+            alt="Task Distribution by Category"
+          />
+          <p>
+            This chart shows the distribution of tasks across different
+            categories.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart" onclick="expandChart(this)">
+          <h2>Task Distribution by Priority</h2>
+          <img
+            src="/static/CHARTS/task_distribution_by_priority.png"
+            alt="Task Distribution by Priority"
+          />
+          <p>
+            This chart displays the distribution of tasks based on priority
+            levels.
+          </p>
+        </div>
+        <div class="expanded-chart" onclick="closeExpandedChart(this)">
+          <span class="close-btn">&times;</span>
+          <img src="" alt="Expanded Chart" />
+        </div>
+      </div>
+
+      {% comment %}
+      <div class="chart">
+        <h2>Task Duration Distribution</h2>
+        <img
+          src="{% static 'task_duration_distribution.png' %}"
+          alt="Task Duration Distribution"
+        />
+        <p>This histogram visualizes the distribution of task durations.</p>
+      </div>
+      {% endcomment %}
+    </div>
+    <script>
+      function expandChart(chart) {
+        var chartImgSrc = chart.querySelector("img").src;
+        var expandedChart = document.querySelector(".expanded-chart");
+        expandedChart.querySelector("img").src = chartImgSrc;
+        expandedChart.style.display = "flex";
+      }
+
+      function closeExpandedChart(expandedChart) {
+        expandedChart.style.display = "none";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee task Management Dashboard </title>
+    <link rel="stylesheet" href="empstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+.warning {
+    display: none;
+}
+
+section {
+    display: flex; 
+}
+
+/* Created by Tivotal */
+
+/* Google fonts(Poppins) */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background-color: #11101d;
+  z-index: 100;
+  transition: all 0.5s ease;
+}
+
+.sidebar.close {
+  width: 78px;
+}
+
+.sidebar .logo {
+  height: 60px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.sidebar .logo i {
+  font-size: 30px;
+  color: #fff;
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.sidebar .logo .logo-name {
+  font-size: 22px;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+}
+
+.sidebar.close .logo .logo-name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar .nav-list {
+  height: 100%;
+  padding: 30px 0 150px 0;
+  overflow: auto;
+}
+
+.sidebar.close .nav-list {
+  overflow: visible;
+}
+
+.sidebar .nav-list::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar .nav-list li {
+  position: relative;
+  list-style: none;
+  transition: all 0.4s ease;
+}
+
+.sidebar .nav-list li:hover {
+  background-color: #1d1b31;
+}
+
+.sidebar .nav-list li .icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar.close .nav-list li .icon-link {
+  display: block;
+}
+
+.sidebar .nav-list li i {
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar.close .nav-list li i.arrow {
+  display: none;
+}
+
+.sidebar .nav-list li.show i.arrow {
+  transform: rotate(-180deg);
+}
+
+.sidebar .nav-list li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.sidebar .nav-list li a .link-name {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  transition: all 0.4s ease;
+}
+
+.sidebar.close .nav-list li a .link-name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar .nav-list li .sub-menu {
+  padding: 6px 6px 14px 80px;
+  margin-top: -10px;
+  background: #1d1b31;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-list li.show .sub-menu {
+  display: block;
+}
+
+.sidebar.close .nav-list li .sub-menu {
+  position: absolute;
+  left: 100%;
+  top: -10px;
+  margin-top: 0;
+  padding: 10px 20px;
+  border-radius: 0 6px 6px 0;
+  opacity: 0;
+  display: block;
+  pointer-events: none;
+  transition: 0s;
+}
+
+.sidebar.close .nav-list li:hover .sub-menu {
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+}
+
+.sidebar .nav-list li .sub-menu a {
+  color: #fff;
+  font-size: 15px;
+  padding: 5px 0;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-list li .sub-menu a:hover {
+  opacity: 1;
+}
+
+.sidebar .nav-list li .sub-menu .link-name {
+  display: none;
+}
+
+.sidebar.close .nav-list li .sub-menu .link-name {
+  font-size: 18px;
+  opacity: 1;
+  display: block;
+}
+
+.sidebar .nav-list li .sub-menu.blank {
+  padding: 3px 20px 6px 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar .nav-list li:hover .sub-menu.blank {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.profile-details {
+  position: fixed;
+  bottom: 0;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1d1b31;
+  padding: 12px 0;
+  transition: all 0.5s ease;
+}
+
+.sidebar.close .profile-details {
+  background-color: none;
+  width: 78px;
+}
+
+.profile-details .profile-content {
+  display: flex;
+  align-items: center;
+}
+
+.profile-details .profile-content img {
+  height: 51px;
+  width: 51px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 14px 0 12px;
+  background-color: #1d1b31;
+  transition: all 0.5s ease;
+}
+
+.sidebar.close .profile-details .profile-content img {
+  padding: 10px;
+}
+
+.profile-details .name-job .name,
+.profile-details .name-job .job {
+  color: #fff;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.sidebar.close .profile-details i,
+.sidebar.close .profile-details .name-job .name,
+.sidebar.close .profile-details .name-job .job {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.profile-details .name-job .job {
+  font-size: 12px;
+}
+
+.home-section {
+  position:absolute;
+ 
+  width: calc(100% - 260px);
+  left: 260px;
+  background-color: #ff9e00;
+  transition: all 0.5s ease;
+  
+}
+
+.sidebar.close ~ .home-section {
+  left: 78px;
+  width: calc(100% - 78px);
+}
+
+.home-section .home-content {
+  display:flex;
+  height: 60px;
+  align-items: center;
+}
+
+.home-section .home-content i,
+.home-section .home-content .text {
+  color: #11101d;
+  font-size: 35px;
+}
+
+.home-section .home-content i {
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.home-section .home-content .text {
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@media (max-width: 400px) {
+  .sidebar.close .nav-list li .sub-menu {
+    display: none;
+  }
+
+  .sidebar {
+    width: 78px;
+  }
+
+  .sidebar.close {
+    width: 0;
+  }
+
+  .home-section {
+    left: 78px;
+    width: calc(100% - 78px);
+    z-index: 100;
+  }
+
+  .sidebar.close ~ .home-section {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.bottom-nav li a:hover , .center-nav li a:hover {    
+    color: purple;
+}
+
+
+hr {
+    margin-left: 20px;
+    height: 1.5px;
+    display: block;
+    margin-bottom: 5px;
+    width: 150px;
+    background-color: #171818;
+    outline: none;
+    border: none;
+}
+
+.bottom-nav {
+    position: absolute;
+    bottom: 30px;
+}
+
+
+/* ======= Main Content Styling ======= */
+.bars {
+    cursor: pointer;
+}
+
+.main-content {
+    padding: 80px;
+    width: 100%;
+}
+
+.main-top {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.bar {
+    margin: 3px 0;
+    width: 20px;
+    height: 4px;
+    border-radius: 4px;
+    background-color: #171515;
+}
+
+.input {
+    width: 100%;
+    text-align: center;
+}
+
+.input input {
+    width: 90%;
+    outline: none;
+    border: none;
+    border: 1px solid rgb(22, 19, 19);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.user {
+    width: 40px;
+    position: relative;
+    transform: scaleX(-1);
+}
+
+.user img {
+    width: 100%;
+}
+
+/* ======== Styling Dashboard ======== */
+.dashboard {
+  width: 60%;
+    padding: 40px;
+    display: block;
+    position:absolute;
+    left: 55%;
+    top: 40%;
+    transform: translate(-60%, -70%);
+}
+
+.heading {
+    margin: 10px;
+}
+
+.dtext{
+    background: white;
+    border: 1px solid black;
+    float: left;
+    padding-right: 100%;
+}
+.color-box {
+    width: 100%;
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content:space-between;
+}
+
+.box {
+    display: flex;
+    height: 120px;
+    flex-direction: column;
+    width: 180px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 10px 5px;
+}
+
+.box i {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.box p {
+    line-height: 30px;
+}
+
+.pink {
+    background-color: rgb(234, 19, 87);
+}
+
+.orange {
+    background-color: rgb(252, 108, 5);
+}
+
+.green {
+    background-color: rgb(6, 94, 81);
+}
+
+.blue {
+    background-color: rgb(83, 75, 230);
+}
+
+/* ======== Styling Recent Activity ======== */
+.activity {
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.activity table {
+    width: 100%;
+}
+
+tr {
+    row-gap: 0px;
+}
+
+th {
+    line-height: 40px;
+    text-align: left;
+}
+
+td {
+    line-height: 28px;
+}
+
+td,
+th {
+    margin: 0;
+}
+
+@media screen and (max-width:630px) {
+    section {
+        display: none;
+    }
+
+    .warning {
+        padding: 5rem;
+        text-align: center;
+        line-height: 35px;
+        background-color: rgb(183, 51, 51);
+        display: flex;
+        color: #8b1e1e;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
+}
+</style>
+<body>
+
+    <div class="warning">
+        <h2> Sorry, this page doesn't support your device, Please use large screen device to see this page </h2>
+    </div>
+
+    <section>
+    <div class="sidebar close">
+    <div class="logo">
+        <img class="logo-name" src="/static/IMAGES/mono.jpg" style="margin:20px;height:40px;border-radius:20px;">
+    </div>
+
+    <ul class="nav-list">
+        <li>
+        <a href="EMPAccount">
+            <i class="fab fa-microsoft"></i>
+            <span class="link-name">Dashboard</span>
+        </a>
+
+        <ul class="sub-menu blank">
+            <li><a href="EMPAccount" class="link-name">Dashboard</a></li>
+        </ul>
+        </li>
+        <li>
+        <div class="icon-link" >
+        <a href="#">
+            <i class="fa-solid fa-list-check"></i>
+            <span class="link-name">Task</span>
+        </a>
+        <i class="fas fa-caret-down arrow"></i>
+        </div>
+        <ul class="sub-menu">
+            <li><a href="#" class="link-name">Dept name</a></li>
+            <li><a href="#" >Task priority</a></li>
+            <li><a href="{% url "EmployeeTask" %}" >Task description</a></li>
+            <li><a href="#" >employee list</a></li>
+            <li><a href="#" >Task end date</a></li>
+        </ul>
+        </li>
+         <li>
+        <a href="EMPAccount">
+            <i class="fa fa-gear"></i>
+            <span class="link-name">Settings</span>
+        </a>
+
+        <ul class="sub-menu blank">
+            <li><a href="EMPAccount" class="link-name">Settings</a></li>
+        </ul>
+        </li>
+        <li>
+            <div class="profile-details">
+            <div class="profile-content">
+            </div>
+
+            <div class="name-job">
+            <div class="name">Employee</div>
+            <div class="job">{{ request.session.emai }}</div>
+            </div>
+            <a href="{% url 'logout' %}"><i class="fas fa-right-to-bracket" ></i></a>
+            </div>
+        </li>
+    </ul>
+    </div>
+
+    <div class="home-section">
+    <div class="home-content">
+        <i class="fas fa-bars"></i>
+        <span class="text">Employee Dashboard</span>
+    </div>
+    </div>
+
+
+        <!-- User Top Naviagation Starts from Here -->
+        
+
+            <!-- User Dashboard Starts from Here -->
+            <div class="dashboard">
+                <h2 class="heading">Dashboard </h2>
+                <div class="color-box">
+                    <div class="box pink">
+                        <p> <i class="fa fa-building-o" aria-hidden="true"></i> </p>
+                        <p> Total department </p>
+                        <h3> 2397 </h3>
+                    </div>
+                    <div class="box orange">
+                        <p> <i class="fa fa-users" aria-hidden="true"></i> </p>
+                        <p> Total Employees </p>
+                        <h3> 10,320 </h3>
+                    </div>
+                    <div class="box green">
+                        <p> <i class="fa fa-area-chart" aria-hidden="true"></i> </p>
+                        <p> In progress Task </p>
+                        <h3> 10,320 </h3>
+                    </div>
+                    <div class="box blue">
+                        <p> <i class="fa fa-tasks" aria-hidden="true"></i> </p>
+                        <p> completed Task </p>
+                        <h3> 20,129 </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+    /* Created by Tivotal */
+
+let btn = document.querySelector(".fa-bars");
+let sidebar = document.querySelector(".sidebar");
+
+btn.addEventListener("click", () => {
+  sidebar.classList.toggle("close");
+});
+
+let arrows = document.querySelectorAll(".arrow");
+for (var i = 0; i < arrows.length; i++) {
+  arrows[i].addEventListener("click", (e) => {
+    let arrowParent = e.target.parentElement.parentElement;
+
+    arrowParent.classList.toggle("show");
+  });
+}
+    const hamburger = document.getElementById('menu');
+    const navigation = document.getElementById('navigation');
+    hamburger.addEventListener('click', function () {
+        navigation.classList.toggle('active')
+        console.log('clicked');
+    })
+</script>
+
+</html>

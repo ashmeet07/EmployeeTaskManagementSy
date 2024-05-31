@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Task</title>
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include jQuery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Include jQuery UI CSS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+<!-- Include Timepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Include Font Awesome CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333; /* Set text color to a darker shade */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            color: #007bff; /* Set heading color to a blue shade */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle text shadow */
+        }
+        .container {
+            width: 80%; /* Set container width to 80% */
+            margin: 20px auto; /* Add margin on all sides */
+            background-color: #fff; /* Set background color */
+            padding: 30px; /* Add padding */
+            border-radius: 10px; /* Add border radius for rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+        }
+        form {
+            max-width: 600px; /* Set maximum width for the form */
+            margin: 0 auto; /* Center align the form */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555; /* Set label color to a darker shade */
+        }
+        input[type=email] {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    background-image: url('data:image/svg+xml,<svg fill="%23777" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-11h-2v2h2v-2zm0 4h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) 50%;
+    background-size: 16px;
+}
+        input[type=text], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 16px;
+            outline: none; /* Remove default outline */
+        }
+        input[type=text]:focus, textarea:focus, select:focus {
+            border-color: #007bff; /* Set border color to blue on focus */
+        }
+        input[type=date]::-webkit-inner-spin-button, input[type=date]::-webkit-calendar-picker-indicator {
+            display: none; /* Hide date input spinner and calendar icon */
+        }
+        input[type=submit] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        input[type=submit]:hover {
+            background-color: #0056b3;
+        }
+        input[type="date"],
+input[type="time"] {
+    width:30%;
+    display:inline-block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background-color: #fff;
+    /* Add your preferred font and color styles */
+}
+
+/* Style the label for better readability */
+label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Assign Task</h1>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" value="Assign Task">
+        </form>
+    </div>
+    <script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd' // Set the date format
+        });
+    });
+
+</script>
+</body>
+</html>
