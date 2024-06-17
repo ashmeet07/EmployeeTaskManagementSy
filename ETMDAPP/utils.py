@@ -1,4 +1,8 @@
 # utils.py
+from .models import Task, FinishedTask, Employee
+import seaborn as sns
+import matplotlib.colors as mcolors
+import numpy as np
 from django.db.models import Count
 from django.core.mail import send_mail
 from django.conf import settings
@@ -9,7 +13,8 @@ from wordcloud import WordCloud
 import pandas as pd
 from .models import Task, FinishedTask
 from django.db.models import Count
-
+import datetime
+from django.utils import timezone
 import matplotlib
 matplotlib.use('Agg')  # Use the 'Agg' backend which is non-interactive
 
@@ -56,14 +61,54 @@ def send_email_to_employee(email, new_email):
 def generate_task_distribution_plot():
     tasks = Task.objects.all()
     df_tasks = read_frame(tasks)
+
+    # Ensure the 'assigned_to' field is the employee's name
     task_counts = df_tasks['assigned_to'].value_counts()
 
-    plt.figure(figsize=(10, 6))
-    task_counts.plot(kind='bar', color='skyblue')
-    plt.title('Task Distribution Among Employees')
-    plt.xlabel('Employee')
-    plt.ylabel('Number of Tasks')
-    plt.xticks(rotation=45)
+    # Sort task counts in descending order
+    task_counts = task_counts.sort_values(ascending=False)
+
+    plt.figure(figsize=(12, 8))
+
+    # Create gradient colormap from dark blue to light blue
+    colormap = plt.cm.Blues
+    norm = mcolors.Normalize(vmin=0, vmax=len(task_counts))
+    colors = [colormap(norm(i)) for i in range(len(task_counts))]
+
+    bars = task_counts.plot(kind='bar', color=colors, edgecolor='black')
+
+    plt.title('Task Distribution Among Employees', fontsize=16)
+    plt.xlabel('Employee', fontsize=14)
+    plt.ylabel('Number of Tasks', fontsize=14)
+
+    # Set y-axis to integer scale
+    plt.gca().yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+
+    plt.xticks(rotation=45, ha='right', fontsize=12)
+    plt.yticks(fontsize=12)
+
+    # Calculate percentiles
+    percentiles = np.percentile(task_counts, [25, 50, 75])
+
+    # Categorize tasks based on percentiles
+    categories = []
+    for count in task_counts:
+        if count >= percentiles[2]:
+            categories.append('Heavy workload')
+        elif count >= percentiles[1]:
+            categories.append('Moderate workload')
+        else:
+            categories.append('Light workload')
+
+    # Create legend with colors corresponding to the bars
+    legend_handles = []
+    for i, (label, color) in enumerate(zip(categories, colors)):
+        if label not in legend_handles:
+            legend_handles.append(label)
+            plt.bar(0, 0, color=color, label=label)  # Dummy bars for legend
+
+    plt.legend(loc='upper right', fontsize=12)
+
     plt.tight_layout()
     plt.savefig('ETMDAPP/static/CHARTS/task_distribution.png')
     plt.close()
@@ -75,31 +120,53 @@ def generate_remaining_tasks_plot():
     finished_tasks = FinishedTask.objects.filter(finished=True).count()
     remaining_tasks = total_tasks - finished_tasks
 
-    labels = ['Finished', 'Remaining']
-    sizes = [finished_tasks, remaining_tasks]
-    colors = ['lightgreen', 'lightcoral']
+    # Calculate percentages
+    finished_percentage = (finished_tasks / total_tasks) * 100
+    remaining_percentage = 100 - finished_percentage
 
-    plt.figure(figsize=(8, 8))
-    plt.pie(sizes, labels=labels, colors=colors,
-            autopct='%1.1f%%', startangle=140)
-    plt.title('Remaining Tasks')
+    labels = [f'Finished ({finished_percentage:.1f}%)',
+              f'Remaining ({remaining_percentage:.1f}%)']
+    sizes = [finished_tasks, remaining_tasks]
+    colors = ['lightblue', 'lightcoral']
+
+    # Explode the first slice to highlight it
+    explode = (0.1, 0)
+
+    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
+
+    # Create pie chart
+    wedges, texts, autotexts = ax.pie(sizes, explode=explode, labels=labels, colors=colors,
+                                      autopct='%1.1f%%', startangle=140, shadow=True)
+
+    # Customizing text properties
+    ax.legend(wedges, labels, loc="upper left", fontsize=10,
+              facecolor='white', edgecolor='black', shadow=True)
+    plt.setp(autotexts, size=12, weight="bold")
+
+    plt.title('Remaining Tasks', fontsize=16)
+
+    # Save the plot
     plt.savefig('ETMDAPP/static/CHARTS/remaining_tasks.png')
     plt.close()
 
 
-def generate_task_deadlines_plot():
-    tasks = Task.objects.all()
-    df_tasks = read_frame(tasks)
+def generate_task_deadlines_table():
+    # Get the current date and time
+    current_date = timezone.now().date()
 
-    plt.figure(figsize=(10, 6))
-    df_tasks['deadline_date'].value_counts().sort_index().plot(marker='o')
-    plt.title('Task Deadlines')
-    plt.xlabel('Deadline Date')
-    plt.ylabel('Number of Tasks')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.savefig('ETMDAPP/static/CHARTS/task_deadlines.png')
-    plt.close()
+    # Calculate the date for the next Monday
+    next_monday = current_date + datetime.timedelta(days=(7 - current_date.weekday()))
+
+    # Calculate the date for the following Monday
+    following_monday = next_monday + datetime.timedelta(weeks=1)
+
+    # Filter tasks whose deadline is within the coming next week starting from Monday
+    tasks = Task.objects.filter(deadline_date__gte=next_monday, deadline_date__lt=following_monday)
+    
+    # Prepare data for the table
+    deadlines_data = [{'deadline_date': task.deadline_date, 'num_tasks': Task.objects.filter(deadline_date=task.deadline_date).count()} for task in tasks]
+
+    return deadlines_data
 
 
 def generate_completed_tasks_over_time_plot():
@@ -107,31 +174,67 @@ def generate_completed_tasks_over_time_plot():
     df_finished_tasks = read_frame(finished_tasks)
 
     plt.figure(figsize=(10, 6))
-    df_finished_tasks['deadline_date'].value_counts(
-    ).sort_index().plot(marker='o')
+    task_counts = df_finished_tasks['deadline_date'].value_counts(
+    ).sort_index()
+    task_counts.plot(marker='o', color='skyblue')
+
     plt.title('Completed Tasks Over Time')
     plt.xlabel('Deadline Date')
     plt.ylabel('Number of Tasks')
     plt.xticks(rotation=45)
     plt.tight_layout()
+
+    # Add legend
+    plt.legend(['Completed Tasks'], loc='upper right', facecolor='lightgrey')
+
     plt.savefig('ETMDAPP/static/CHARTS/completed_tasks_over_time.png')
     plt.close()
 
 
 def generate_employee_performance_plot():
+    # Query all tasks
+    tasks = Task.objects.all()
     finished_tasks = FinishedTask.objects.filter(finished=True)
-    df_finished_tasks = read_frame(finished_tasks)
-    employee_performance = df_finished_tasks['assigned_to'].value_counts()
 
+    # Convert queryset to DataFrame
+    df_tasks = read_frame(tasks)
+    df_finished_tasks = read_frame(finished_tasks)
+
+    # Group tasks by assigned employee and count the number of tasks for each employee
+    employee_task_counts = df_tasks['assigned_to'].value_counts()
+
+    # Group finished tasks by assigned employee and count the number of completed tasks for each employee
+    employee_finished_task_counts = df_finished_tasks['assigned_to'].value_counts(
+    )
+
+    # Merge the two DataFrames on employee name and fill missing values with 0
+    df_employee_performance = pd.merge(
+        employee_task_counts, employee_finished_task_counts, left_index=True, right_index=True, how='outer').fillna(0)
+
+    # Rename columns for clarity
+    df_employee_performance.columns = ['total_tasks', 'completed_tasks']
+
+    # Calculate completion percentage for each employee
+    df_employee_performance['completion_percentage'] = (
+        df_employee_performance['completed_tasks'] / df_employee_performance['total_tasks']) * 100
+
+    # Sort employees by completion percentage
+    df_employee_performance.sort_values(
+        by='completion_percentage', ascending=False, inplace=True)
+
+    # Plotting
     plt.figure(figsize=(10, 6))
-    employee_performance.plot(kind='bar', color='orange')
+    sns.barplot(x='completion_percentage', y=df_employee_performance.index,
+                data=df_employee_performance, palette='coolwarm')
     plt.title('Employee Performance')
-    plt.xlabel('Employee')
-    plt.ylabel('Number of Completed Tasks')
-    plt.xticks(rotation=45)
+    plt.xlabel('Completion Percentage')
+    plt.ylabel('Employee')
     plt.tight_layout()
+
+    # Save the plot
     plt.savefig('ETMDAPP/static/CHARTS/employee_performance.png')
     plt.close()
+
 
 
 def generate_task_description_wordcloud():

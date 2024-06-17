@@ -9,6 +9,8 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
+        background-color:black;
+        color :white;
       }
       .container {
         width: 80%;
@@ -23,7 +25,6 @@
         overflow: hidden;
       }
       .chart {
-        border: 1px solid #ccc;
         padding: 20px;
         animation: slideIn 0.5s ease-in-out;
         position: relative;
@@ -136,20 +137,38 @@
       </div>
       
       <div class="chart-container">
-        <div class="chart" onclick="expandChart(this)">
-          <h2>Task Deadlines</h2>
-          <img
-            src="/static/CHARTS/task_deadlines.png"
-            alt="Task Deadlines Chart"
-          />
-          <p>
-            This chart visualizes the distribution of task deadlines over time.
-          </p>
-        </div>
-        <div class="expanded-chart" onclick="closeExpandedChart(this)">
-          <span class="close-btn">&times;</span>
-          <img src="" alt="Expanded Chart" />
-        </div>
+        <div class="chart-container">
+    <div class="chart" onclick="expandChart(this)">
+        <h2>Task Deadlines</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Deadline Date</th>
+                    <th>Number of Tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-06-10</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>2024-06-11</td>
+                    <td>3</td>
+                </tr>
+                <!-- Add more rows dynamically based on task deadlines -->
+            </tbody>
+        </table>
+        <p>
+            This table shows the distribution of task deadlines over time.
+        </p>
+    </div>
+    <div class="expanded-chart" onclick="closeExpandedChart(this)">
+        <span class="close-btn">&times;</span>
+        <img src="" alt="Expanded Chart" />
+    </div>
+</div>
+
       </div>
 
       <div class="chart-container">

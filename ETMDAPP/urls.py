@@ -17,8 +17,10 @@ urlpatterns = [
     path('AdminDashboard/assigned-tasks/', views.assigned_tasks, name='assigned_tasks'),
     path('AdminDashboard/task-des/', views.task_des, name='task_des'),
     path('AdminDashboard/finished-tasks/', views.finished_tasks, name='finished_tasks'),
-    path('mark_task_finished/<int:task_id>/<email>/', views.mark_task_finished, name='mark_task_finished'),
+    path('mark_task_finished/<int:task_id>/<email>/',
+         views.mark_task_finished, name='mark_task_finished'),
     path('AdminDashboard/task-end-dates/', views.task_end_dates, name='task_end_dates'),
+    path('EMPTaskEndDate', views.EMPTaskEndDate, name='EMPTaskEndDate'),
 
     # path("AdminDashboard", views.AdminDashboard, name="AdminDashboard"),
     path('logout/', views.logout, name='logout'),
@@ -41,5 +43,6 @@ urlpatterns = [
     path('EMPDashboard', views.EMPDASHBOARD, name='EMPDashboard'),
     path('EMPAccount', views.EMPAccount, name='EMPAccount'),
     path('EmployeeTask', views.EmployeeTask, name='EmployeeTask'),
+    path('TaskDashboard', views.TaskDashboard, name='TaskDashboard'),
     # Other URL patterns...
 ]

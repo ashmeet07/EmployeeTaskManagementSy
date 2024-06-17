@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,10 +6,7 @@
     list-style: none;
     text-decoration: none;
 }
-body{
-    width: 100vw;
-    height: 100%;
-}
+
 .warning {
     display: none;
 }
@@ -36,7 +33,7 @@ section {
     left: 0;
     height: 100%;
     width: 260px;
-    background-color: #3d98cd8f;
+    background-color: #11101d;
     z-index: 100;
     transition: all 0.5s ease;
 }
@@ -54,7 +51,7 @@ section {
 
 .sidebar .logo i {
     font-size: 30px;
-    color: #ffffff39;
+    color: #fff;
     height: 50px;
     min-width: 78px;
     text-align: center;
@@ -63,7 +60,7 @@ section {
 
 .sidebar .logo .logo-name {
     font-size: 22px;
-    color: #000000;
+    color: #fff;
     font-weight: 600;
     transition: all 0.3s ease;
     transition-delay: 0.1s;
@@ -95,8 +92,7 @@ section {
 }
 
 .sidebar .nav-list li:hover {
-    background-color: #ffffff;
-    border-radius: 20px;
+    background-color: #1d1b31;
 }
 
 .sidebar .nav-list li .icon-link {
@@ -114,7 +110,7 @@ section {
     min-width: 78px;
     text-align: center;
     line-height: 50px;
-    color: #000000;
+    color: #fff;
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -135,7 +131,7 @@ section {
 }
 
 .sidebar .nav-list li a .link-name {
-    color: #000000;
+    color: #fff;
     font-size: 18px;
     font-weight: 400;
     transition: all 0.4s ease;
@@ -149,7 +145,7 @@ section {
 .sidebar .nav-list li .sub-menu {
     padding: 6px 6px 14px 80px;
     margin-top: -10px;
-    background: #14c2ab;
+    background: #1d1b31;
     display: none;
     transition: all 0.3s ease;
 }
@@ -179,10 +175,9 @@ section {
 }
 
 .sidebar .nav-list li .sub-menu a {
-    color: #000000;
+    color: #fff;
     font-size: 15px;
     padding: 5px 0;
-    text-align: center;
     white-space: nowrap;
     opacity: 0.6;
     transition: all 0.3s ease;
@@ -220,7 +215,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #41b5b3;
+    background-color: #d322c2;
     padding: 12px 0;
     transition: all 0.5s ease;
 }
@@ -241,7 +236,7 @@ section {
     border-radius: 50%;
     object-fit: cover;
     margin: 0 14px 0 12px;
-    background-color: #1b2731;
+    background-color: #1d1b31;
     transition: all 0.5s ease;
 }
 
@@ -251,7 +246,7 @@ section {
 
 .profile-details .name-job .name,
 .profile-details .name-job .job {
-    color: #000000;
+    color: #fff;
     font-size: 18px;
     white-space: nowrap;
 }
@@ -332,7 +327,7 @@ section {
 
 .bottom-nav li a:hover,
 .center-nav li a:hover {
-    color: rgb(255, 255, 255);
+    color: purple;
 }
 
 
@@ -428,7 +423,6 @@ hr {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    color: white;
     justify-content: space-between;
 }
 
@@ -446,7 +440,7 @@ hr {
 .box i {
     font-size: 1.3rem;
     margin-bottom: 5px;
-    color: #ffffff;
+    color: #000000;
 }
 
 .box p {
@@ -454,19 +448,19 @@ hr {
 }
 
 .pink {
-    background-color: rgb(19, 184, 234);
+    background-color: rgb(230, 123, 157);
 }
 
 .orange {
-    background-color: rgb(252, 108, 5);
+    background-color: rgb(202, 144, 102);
 }
 
 .green {
-    background-color: rgb(122, 10, 10);
+    background-color: rgb(94, 222, 203);
 }
 
 .blue {
-    background-color: rgb(38, 28, 231);
+    background-color: rgb(154, 193, 230);
 }
 
 /* ======== Styling Recent Activity ======== */
@@ -497,22 +491,21 @@ th {
     margin: 0;
 }
 
-
-@media screen and (max-width: 992px) {
-    .dashboard {
-        width: 300px;
-        margin-top: -400px;
-        /* Adjust margin-top for even smaller screens */
-    }
-}
-
-/* Media query for mobile screens */
-@media screen and (max-width: 576px) {
-    .dashboard {
-        width: 200px;
-        margin-top: -380px;
-        /* Adjust margin-top for mobile screens */
-        padding: 20px;
+@media screen and (max-width:630px) {
+    section {
+        display: none;
     }
 
+    .warning {
+        padding: 5rem;
+        text-align: center;
+        line-height: 35px;
+        background-color: rgb(183, 51, 51);
+        display: flex;
+        color: #8b1e1e;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
 }

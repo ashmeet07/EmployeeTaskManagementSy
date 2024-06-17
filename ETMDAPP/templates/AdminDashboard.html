@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard </title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    {% comment %} <link rel="stylesheet" href="/static/css/style.css"> {% endcomment %}
     <link rel="stylesheet" href="/static/css/admindashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -13,10 +13,6 @@
     
 </head>
 <body>
-
-    <div class="warning">
-        <h2> Sorry, this page doesn't support your device, Please use large screen device to see this page </h2>
-    </div>
 
     <section>
   
@@ -74,6 +70,9 @@
           </div>
            
           <ul class="sub-menu">
+            <a href="#">
+              <span class="link-name">Task</span>
+            </a>
             <li><a href="{% url "task_des" %}" >Task description </a></li>
             <li><a href={% url "Task" %} >Assign Task</a></li>
             <li><a href={% url "assigned_tasks" %} >Assigned Task List</a></li>
