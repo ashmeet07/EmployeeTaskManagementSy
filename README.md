@@ -62,8 +62,8 @@ Check out the video demonstration of the project: [Watch Video](https://www.link
 ### ℹ️ Additional Information
 
 - **Technologies Used**: Python, Django, Matplotlib, Anaconda
-- **License**: © [Ashmeet Singh]. Please use the code with permission.
+- **License**: © [Gajal Rathore, Kushi Verma, Darshana Partidar, Ashmeet Singh]. Please use the code with permission.
 
 ### 📧 Contact
 
-For inquiries about **Employee Task Management System**, please contact [Ashmeet Singh] at [gaminggos0123@gmail.com].
+For inquiries about **Employee Task Management System**, please contact [Gajal Rathore].
