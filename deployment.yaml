@@ -18,3 +18,4 @@ spec:
             imagePullPolicy: Never  # Prevents Kubernetes from trying to pull from Docker Hub
             ports:
               - containerPort: 8000  # Change if needed
+                hostPort: 8000
