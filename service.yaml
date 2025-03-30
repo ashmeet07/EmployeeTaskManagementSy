@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-task-service
+spec:
+  selector:
+    app: employee-task-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000  # Change if needed
+  type: NodePort

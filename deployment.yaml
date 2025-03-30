@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-task-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-task-app
+  template:
+    metadata:
+      labels:
+        app: employee-task-app
+    spec:
+        containers:
+          - name: employee-task-app
+            image: localhost/employeetaskmanager:latest  # Use the correct image name
+            imagePullPolicy: Never  # Prevents Kubernetes from trying to pull from Docker Hub
+            ports:
+              - containerPort: 8000  # Change if needed
