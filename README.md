@@ -73,6 +73,7 @@ Access the application at: **http://127.0.0.1:8000/**
 ### **2️⃣ Initialize Podman Machine**
 ```sh
 podman machine init
+podman machine init --name employee-task-machine --cpus 2 --memory 2200 --disk-size 20
 podman machine start
 ```
 
