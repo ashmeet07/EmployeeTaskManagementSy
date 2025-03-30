@@ -1,1 +1,4 @@
-
+create migrations files and run python manage.py runmigrations
+then run python manage.py migrate
+admin username= user1
+admin password= user
