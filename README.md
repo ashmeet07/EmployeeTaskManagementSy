@@ -62,7 +62,6 @@ Access the application at: **http://127.0.0.1:8000/**
   ```sh
   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
   ```
-- **Coco:** [Download Coco](https://github.com/cocoproj/coco)
 - **Podman:** [Download Podman](https://podman.io/getting-started/installation)
 - **Minikube:** [Install Minikube](https://minikube.sigs.k8s.io/docs/start/)
 - **Kubernetes CLI:** Install via Chocolatey:
