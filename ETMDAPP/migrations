@@ -1,4 +1,4 @@
-create migrations files and run python manage.py runmigrations
+create migrations files and run python manage.py runmigrations make sure it has the __init__.py inside migrations dir
 then run python manage.py migrate
 admin username= user1
 admin password= user
