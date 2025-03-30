@@ -73,7 +73,7 @@ Access the application at: **http://127.0.0.1:8000/**
 ```sh
 podman machine init
 podman machine init --name employee-task-machine --cpus 2 --memory 2200 --disk-size 20
-podman machine start
+podman machine start employee-task-machine
 ```
 
 ### **3️⃣ Build and Export Docker Image as TAR**
@@ -94,7 +94,7 @@ docker images | grep employeetaskmanager
 ### **5️⃣ Deploy to Kubernetes**
 Apply the deployment:
 ```sh
-kubectl apply -f employee-task-app.yaml
+kubectl apply -f deployment.yaml
 ```
 Verify the deployment:
 ```sh
@@ -126,7 +126,7 @@ minikube image load employeetaskmanager:latest
 ### **3️⃣ Deploy to Kubernetes**
 Apply the deployment:
 ```sh
-kubectl apply -f employee-task-app.yaml
+kubectl apply -f deployment.yaml
 ```
 Check the deployment:
 ```sh
