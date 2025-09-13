@@ -137,6 +137,4 @@ kubectl get pods
 kubectl get services
 ```
 
-## 📧 Contact
-For inquiries, reach out to **[Gajal Rathore]**.
 
